@@ -23,7 +23,7 @@ def get_summary_from_openai(json_data: dict) -> str:
 
     try:
         ai_model = OpenAIModel.from_message(
-            model_name="gpt-4o-mini",
+            model_name="gpt-4.1-nano",
             system_message=system_message,
             user_message=user_message,
             temperature=0.3,
@@ -39,7 +39,6 @@ def get_summary_from_openai(json_data: dict) -> str:
 def save_summary_to_md(summary: str, filename: str = "summary.md"):
     """Save summary to Markdown file"""
     with open(filename, 'w', encoding='utf-8') as mdfile:
-        # Write summary
         mdfile.write("## AI Summary\n\n")
         mdfile.write(summary)
 
@@ -51,10 +50,8 @@ def main():
     if not json_data:
         return
     
-    # Get summary from OpenAI
     summary = get_summary_from_openai(json_data)
-    
-    # Save to Markdown
+
     save_summary_to_md(summary)
 
 if __name__ == "__main__":
