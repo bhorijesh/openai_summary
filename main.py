@@ -38,7 +38,13 @@ def get_summary_from_openai(json_data: dict) -> str:
 
 def save_summary_to_md(summary: str, filename: str = "summary.md"):
     """Save summary to Markdown file"""
-    with open(filename, 'w', encoding='utf-8') as mdfile:
+    # Ensure output directory exists
+    output_dir = "output"
+    os.makedirs(output_dir, exist_ok=True)
+
+    output_path = os.path.join(output_dir, filename)
+    
+    with open(output_path, 'w', encoding='utf-8') as mdfile:
         mdfile.write("## AI Summary\n\n")
         mdfile.write(summary)
 
